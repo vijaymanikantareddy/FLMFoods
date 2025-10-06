@@ -1,6 +1,6 @@
 package com.flmfoods.model;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,18 +13,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "orderitems")
+@Table(name="order_items")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItem {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long orderItemId;
-	private long itemId;
 	private int quantity;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
+	private long itemId;
+	@ManyToOne
+	@JoinColumn(name="order_id")
 	private Order order;
+
 }

@@ -1,35 +1,33 @@
 package com.flmfoods.model;
 
-import java.util.List;
+import java.time.LocalTime;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "orders")
+@Table(name="delivery_assignments")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Order {
-
+@NoArgsConstructor
+public class DeliveryAssignment {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long orderId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long deliveryAssignmentId;
 	private String status;
-	private double orderPrice;
-	private long userId;
-	private long restaurantId;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-	private List<OrderItem> orderItems;
-
+	private LocalTime assignedTime;
+	private long orderId;
+	@ManyToOne
+	@JoinColumn(name="delivery_person_id",nullable=false)
+	private DeliveryPerson deliveryPerson;
 }

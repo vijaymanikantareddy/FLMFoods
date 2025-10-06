@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,20 +15,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "orders")
+@Table(name="users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long orderId;
-	private String status;
-	private double orderPrice;
 	private long userId;
-	private long restaurantId;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-	private List<OrderItem> orderItems;
-
+	private String userName;
+	private String phoneNum;
+	private String email;
+	private String password;
+	@OneToMany
+	@JoinColumn(name="user_address_id")
+	private List<UserAddress> userAddress;
+	
 }
